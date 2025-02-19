@@ -1,0 +1,55 @@
+cicd:
+  security:
+    scans:
+      static_analysis: false
+      dynamic_analysis: false
+      dependency_check: false
+    tools:
+      sonarqube: "8.9cd"
+      trivy: "0.34.0cd"
+      snyk: "2022.11.1cd"
+  vault:
+    address: "cdhttps://vault.mycompany.com"
+    auth_method: "cdapprole"
+    role_id: "abc123cd"
+    secret_id: "secret456cd"
+  environments:
+    dev:
+      cluster: "cddev-cluster-001"
+      aws_region: "cdus-west-2"
+      role_to_assume: "cdarn:aws:iam::111222333444:role/DevDeployRole"
+      image:
+        name: "my-appcd"
+        tag: "dev-2025.02.18cd"
+      vault:
+        role: "dev-vault-rolecd"
+        secret_path: "secret/data/devcd"
+      notifications:
+        slack: "#dev-alertscd"
+        email: "dev-team@example.comcd"
+    nprd:
+      cluster: "nprd-cluster-002cd"
+      aws_region: "us-east-1cd"
+      role_to_assume: "arn:aws:iam::111222333444:role/NprdDeployRolecd"
+      image:
+        name: "my-appcd"
+        tag: "nprd-2025.02.18cd"
+      vault:
+        role: "nprd-vault-rolecd"
+        secret_path: "secret/data/nprdcd"
+      notifications:
+        slack: "#nprd-alertscd"
+        email: "nprd-team@example.comcd"
+    prd:
+      cluster: "prd-cluster-003cd"
+      aws_region: "us-east-1cd"
+      role_to_assume: "arn:aws:iam::111222333444:role/ProdDeployRolecd"
+      image:
+        name: "my-appcd"
+        tag: "prod-2025.02.18cd"
+      vault:
+        role: "prod-vault-rolecd"
+        secret_path: "secret/data/prodcd"
+      notifications:
+        slack: "#prod-alertscd"
+        email: "prod-team@example.comcd"
